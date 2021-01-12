@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-    private List<String> belohnungeng(int entfernung, final int belohnungsWert){
+    private List<String> belohnungeng(double entfernung, final int belohnungsWert){
         List<String> beute = new ArrayList<>();
         items.add(new Gegenstand("Glas Flasche", 8, 40));
         items.add(new Gegenstand("PET Flasche", 15, 30));
