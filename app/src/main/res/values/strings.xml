@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">BottleCollector</string>
     <string name="preference_file_key">TestKey</string>
-    <string name="saved_high_score_key">SavedHighScoreKey</string>
+    <string name="saved_gegangene_kilometer">SavedHighScoreKey</string>
 </resources>
