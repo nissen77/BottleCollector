@@ -14,9 +14,14 @@ public class StatistikActivity extends AppCompatActivity {
         setContentView(R.layout.activity_statistik);
 
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
         TextView textView = findViewById(R.id.kilometerGesamt);
-        textView.setText(message);
+        textView.setText(StatisikSpeicher.getGegangeneMeterGesamt(this));
+
+        textView = findViewById(R.id.besterTag);
+        textView.setText(StatisikSpeicher.getBesterTag(this));
+
+        textView = findViewById(R.id.besteWoche);
+        textView.setText(StatisikSpeicher.getBesteWoche(this));
     }
 }

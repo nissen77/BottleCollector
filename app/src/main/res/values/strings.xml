@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">BottleCollector</string>
-    <string name="preference_file_key">TestKey</string>
-    <string name="saved_gegangene_kilometer">SavedHighScoreKey</string>
+    <string name="preference_file_key">SharedPref</string>
+    <string name="saved_gegangene_meter_gesamt">GegangeneMeterGesamt</string>
+    <string name="best_day_date">BesterTagDatum</string>
+    <string name="best_day_meters">BesterTagMeter</string>
+    <string name="best_week">BesteWoche</string>
 </resources>
