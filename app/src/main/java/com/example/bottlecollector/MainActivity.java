@@ -18,13 +18,12 @@ import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
-    public static  final  String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-    public int highScore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Testdaten für den Speicher anlegen
         LocalDate date = LocalDate.now();
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
         int woche =  date.get(weekFields.weekOfWeekBasedYear());
