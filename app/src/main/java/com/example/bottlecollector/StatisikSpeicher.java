@@ -16,63 +16,97 @@ import java.util.Locale;
 
 public class StatisikSpeicher {
 
-    public static String getGegangeneMeterGesamt(Context cont){
-        Context context = cont;
-        SharedPreferences sharedPref = context.getSharedPreferences(cont.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        int highScore = sharedPref.getInt(cont.getString(R.string.saved_gegangene_meter_gesamt),0);
-        return highScore+"m";
+    SharedPreferences sharedPref;
+    Context cont;
+
+    public StatisikSpeicher(Context cont){
+        sharedPref = cont.getSharedPreferences(cont.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        this.cont = cont;
     }
 
-    public  static void setGeganeneMeterGesamt(Context cont, int strecke){
-        SharedPreferences sharedPref = cont.getSharedPreferences(cont.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+    public  StatisikSpeicher(){
+    }
+
+    // Setter für die Statistik werte
+    public void setGeganeneMeterGesamt(int strecke){
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(cont.getString(R.string.saved_gegangene_meter_gesamt), strecke);
         editor.apply();
     }
 
-    public static void setBesterTag(Context cont, int strecke, LocalDate tag){
-        SharedPreferences sharedPref = cont.getSharedPreferences(cont.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+    public void setBesterTag(int strecke, LocalDate tag){
         SharedPreferences.Editor editor = sharedPref.edit();
-        if(strecke > getBesterTagMeter(cont)){
+        if(strecke > getBesterTagMeter()){
             editor.putInt(cont.getString(R.string.best_day_meters), strecke);
             editor.putString(cont.getString(R.string.best_day_date), tag.toString());
             editor.apply();
         }
     }
 
-    public static String getBesterTag(Context cont){
-        SharedPreferences sharedPref = cont.getSharedPreferences(cont.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        return getBesterTagDatum(cont).format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault()))+" "+getBesterTagMeter(cont)+"m";
-    }
-
-    public static String getBesteWoche(Context cont){
-        SharedPreferences sharedPref = cont.getSharedPreferences(cont.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        return sharedPref.getString(cont.getString(R.string.best_week), "Noch kein Highscore!");
-    }
-
-    public static void setBesteWoche(Context cont, int strecke, int woche){
-        SharedPreferences sharedPref = cont.getSharedPreferences(cont.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+    public void setBesteWoche(int strecke, int woche, int jahr){
         SharedPreferences.Editor editor = sharedPref.edit();
         if(!sharedPref.contains(cont.getString(R.string.best_week))){
-            editor.putString(cont.getString(R.string.best_week), "0 0");
+            editor.putString(cont.getString(R.string.best_week), "Jahr:0 Woche:0 0m");
             editor.apply();
             return;
 
         }
-        if(strecke > Integer.parseInt(getBesteWoche(cont).split(" ")[1])){
-            editor.putString(cont.getString(R.string.best_week), woche+" "+strecke);
+        if(strecke > Integer.parseInt(getBesteWoche().split(" ")[2].split("m")[0])){
+            editor.putString(cont.getString(R.string.best_week), "Jahr:"+jahr+" Woche:"+woche+" "+strecke+"m");
             editor.apply();
         }
     }
 
+    public void setAktuellerTag(int strecke){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        if(!sharedPref.contains(cont.getString(R.string.aktueller_tag))){
+            editor.putString(cont.getString(R.string.aktueller_tag), "0m");
+            editor.apply();
+            return;
+        }
+        editor.putString(cont.getString(R.string.aktueller_tag), strecke+"m");
+        editor.apply();
+    }
+
+    public void setAktuelleWoche(int strecke){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        if(!sharedPref.contains(cont.getString(R.string.aktuelle_woche))){
+            editor.putString(cont.getString(R.string.aktuelle_woche), "0m");
+            editor.apply();
+            return;
+        }
+        editor.putString(cont.getString(R.string.aktuelle_woche), strecke+"m");
+        editor.apply();
+    }
+
+    // Getter für die Statistik werte
+    public String getGegangeneMeterGesamt(){
+        int highScore = sharedPref.getInt(cont.getString(R.string.saved_gegangene_meter_gesamt),0);
+        return highScore+"m";
+    }
+
+    public String getBesterTag(){
+        return getBesterTagDatum().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault()))+" "+getBesterTagMeter()+"m";
+    }
+
+    public String getBesteWoche(){
+        return sharedPref.getString(cont.getString(R.string.best_week), "Noch kein Highscore!");
+    }
+
+    public String getAktuellerTag(){
+        return sharedPref.getString(cont.getString(R.string.aktueller_tag), "0m");
+    }
+
+    public String getAktuelleWoche(){
+        return sharedPref.getString(cont.getString(R.string.aktuelle_woche), "0m");
+    }
+
     // Hilfs Funktionen
-    private static LocalDate getBesterTagDatum(Context cont){
-        SharedPreferences sharedPref = cont.getSharedPreferences(cont.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+    private LocalDate getBesterTagDatum(){
         return LocalDate.parse(sharedPref.getString(cont.getString(R.string.best_day_date), LocalDate.now().toString()));
     }
 
-    private static int getBesterTagMeter(Context cont){
-        SharedPreferences sharedPref = cont.getSharedPreferences(cont.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+    private int getBesterTagMeter(){
         return  sharedPref.getInt(cont.getString(R.string.best_day_meters), 0);
     }
 
