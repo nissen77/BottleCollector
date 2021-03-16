@@ -29,10 +29,13 @@ public class MainActivity extends AppCompatActivity {
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
         int woche =  date.get(weekFields.weekOfWeekBasedYear());
 
+        StatisikSpeicher speicher = new StatisikSpeicher(this);
 
-        StatisikSpeicher.setGeganeneMeterGesamt(this, 30);
-        StatisikSpeicher.setBesterTag(this, 8342, LocalDate.of(2010, 03, 10));
-        StatisikSpeicher.setBesteWoche(this, 1000, woche);
+        speicher.setGeganeneMeterGesamt(30);
+        speicher.setBesterTag(8342, LocalDate.of(2010, 03, 10));
+        speicher.setBesteWoche(1870, woche, date.getYear());
+        speicher.setAktuellerTag(150);
+        speicher.setAktuelleWoche(1500);
 
         //Liste holen und anzeigen
         List<String> erg = Belohnung.belohnungeng(1200, 200);
