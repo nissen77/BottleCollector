@@ -86,7 +86,7 @@ public class StatisikSpeicher {
     }
 
     public String getBesterTag(){
-        return getBesterTagDatum().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault()))+" "+getBesterTagMeter()+"m";
+        return getBesterTagDatum().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.GERMAN))+"\n "+getBesterTagMeter()+"m";
     }
 
     public String getBesteWoche(){
