@@ -5,6 +5,7 @@
     <string name="best_day_date">BesterTagDatum</string>
     <string name="best_day_meters">BesterTagMeter</string>
     <string name="best_week">BesteWoche</string>
+    <string name="best_week_meters">BesteWocheMeter</string>
     <string name="aktueller_tag">AktuellerTag</string>
     <string name="aktuelle_woche">AktuelleWoche</string>
 </resources>
