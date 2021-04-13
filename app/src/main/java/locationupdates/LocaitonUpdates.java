@@ -1,4 +1,4 @@
-package locationUpdates;
+package locationupdates;
 
 import android.Manifest;
 import android.app.Activity;
@@ -232,14 +232,14 @@ public class LocaitonUpdates extends AppCompatActivity {
 
 
                 mLastUpdateTime = spf.format(new Date());
-                updateLocationUI();
+                //updateLocationUI();
             }
         };
     }
 
     /**
-     * Uses a {@link com.google.android.gms.location.LocationSettingsRequest.Builder} to build
-     * a {@link com.google.android.gms.location.LocationSettingsRequest} that is used for checking
+     * Uses a {@link LocationSettingsRequest.Builder} to build
+     * a {@link LocationSettingsRequest} that is used for checking
      * if a device has the needed location settings.
      */
     public void buildLocationSettingsRequest() {
@@ -327,7 +327,7 @@ public class LocaitonUpdates extends AppCompatActivity {
      */
     public void updateUI() {
         setButtonsEnabledState();
-        updateLocationUI();
+        //updateLocationUI();
     }
 
     /**
