@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         lu.main = MainActivity.this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
@@ -36,25 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         lu.mStartUpdatesButton = (Button) findViewById(R.id.btn_Weiter);
         lu.mStopUpdatesButton = (Button) findViewById(R.id.btn_stop);
-        /*
-        //Testdaten für den Speicher anlegen
-        LocalDate date = LocalDate.now();
-        WeekFields weekFields = WeekFields.of(Locale.getDefault());
-        int woche =  date.get(weekFields.weekOfWeekBasedYear());
-
-        StatisikSpeicher speicher = new StatisikSpeicher(this);
-        speicher.setGeganeneMeterGesamt(30000);
-        speicher.setBesterTag(8342, LocalDate.of(2010, 03, 10));
-        speicher.setBesteWoche(4200, woche, date.getYear());
-        speicher.setAktuellerTag(160);
-        speicher.setAktuelleWoche(1500);
-
-        //Liste holen und anzeigen
-        List<String> erg = Belohnung.belohnungeng(1200, 200);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, erg);
-        ListView listView = (ListView) findViewById(R.id.ausgabe);
-        listView.setAdapter(adapter);
-        */
 
         lu.mRequestingLocationUpdates = false;
 
@@ -69,21 +49,32 @@ public class MainActivity extends AppCompatActivity {
         lu.createLocationCallback();
         lu.createLocationRequest();
         lu.buildLocationSettingsRequest();
+
+        //Testdaten für den Speicher anlegen
+        LocalDate date = LocalDate.now();
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+        int woche =  date.get(weekFields.weekOfWeekBasedYear());
+
+        StatisikSpeicher speicher = new StatisikSpeicher(this);
+        speicher.setGeganeneMeterGesamt(30000);
+        speicher.setBesterTag(8342, LocalDate.of(2010, 03, 10));
+        speicher.setBesteWoche(4200, woche, date.getYear());
+        speicher.setAktuellerTag(160);
+        speicher.setAktuelleWoche(1500);
     }
 
     public void sendMessage(View view){
-        Intent intent = new Intent(this, StatistikActivity.class);
+        Intent intent = new Intent(this, ListActivity.class);
         startActivity(intent);
     }
 
     public void startUpdatesButtonHandler(View view) {
-        Toast.makeText(this, "btn test", Toast.LENGTH_SHORT).show();
         if (!lu.mRequestingLocationUpdates) {
             lu.mRequestingLocationUpdates = true;
             //lu.setButtonsEnabledState();
             lu.startLocationUpdates();
         }
-        startActivity(new Intent(this, StatistikActivity.class));
+        startActivity(new Intent(this, ListActivity.class));
     }
 
     /**

@@ -11,10 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".StatistikActivity"
-                  android:parentActivityName=".MainActivity">
+                  android:parentActivityName=".ListActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                        android:value=".MainActivity"/>
         </activity>
+
+        <activity android:name=".ListActivity"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
