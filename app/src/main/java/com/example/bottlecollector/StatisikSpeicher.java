@@ -26,7 +26,7 @@ public class StatisikSpeicher {
         this.cont = cont;
     }
 
-    // Setter für die Statistik werte
+    // Setter für die Statistikwerte
     public void setGeganeneMeterGesamt(int strecke){
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(cont.getString(R.string.saved_gegangene_meter_gesamt), strecke);
@@ -80,7 +80,7 @@ public class StatisikSpeicher {
         editor.apply();
     }
 
-    // Getter für die Statistik werte
+    // Getter für die Statistikwerte
     public String getGegangeneMeterGesamt(){
         int highScore = sharedPref.getInt(cont.getString(R.string.saved_gegangene_meter_gesamt),0);
         return nf.format(highScore)+"m";
