@@ -26,9 +26,6 @@ public class StatisikSpeicher {
         this.cont = cont;
     }
 
-    public  StatisikSpeicher(){
-    }
-
     // Setter für die Statistik werte
     public void setGeganeneMeterGesamt(int strecke){
         SharedPreferences.Editor editor = sharedPref.edit();

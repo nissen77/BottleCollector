@@ -1,4 +1,4 @@
-package com.example.bottlecollector;
+package belohnungsKlassen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class Belohnung {
         add(new Pet("Nashorn", 12));
     }};
 
-    protected static List<String> belohnungeng(double entfernung, final double belohnungsWert){
+    public static List<String> belohnungeng(double entfernung, final double belohnungsWert){
         double bonusChance = 1.0;
         for(Pet p : pets){
             if(p.isActive()){
