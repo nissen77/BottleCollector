@@ -43,6 +43,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import belohnungsKlassen.Belohnung;
+import sharedPrefSpeicherKlassen.GegenstandSpeicher;
+
 public class LocaitonUpdates extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
@@ -110,21 +113,8 @@ public class LocaitonUpdates extends AppCompatActivity {
     public Button mStartUpdatesButton;
     public Button mStopUpdatesButton;
     public TextView mLastUpdateTimeTextView;
-    public TextView mLatitudeTextView;
-    public TextView mLongitudeTextView;
 
-    public TextView mLatitudeTextView_old;
-    public TextView mLongitudeTextView_old;
-    public TextView distance;
 
-    // Labels.
-    public String mLatitudeLabel;
-    public String mLongitudeLabel;
-    public String mLastUpdateTimeLabel;
-
-    public String mLatitudeLabel_old;
-    public String mLongitudeLabel_old;
-    public String distanceLabel;
 
     /**
      * Tracks the status of the location updates request. Value changes when the user presses the
@@ -139,6 +129,7 @@ public class LocaitonUpdates extends AppCompatActivity {
 
     public Activity main;
 
+    private int strecke = 0;
     //=======================================
     //      Methods
     //=======================================
@@ -212,29 +203,39 @@ public class LocaitonUpdates extends AppCompatActivity {
                 super.onLocationResult(locationResult);
                 SimpleDateFormat spf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
 
-                if(mCurrentLocation == null) mCurrentLocation = locationResult.getLastLocation();
-                if(mLastLocation == null) mLastLocation = mCurrentLocation;
+                if (mCurrentLocation == null) mCurrentLocation = locationResult.getLastLocation();
+                if (mLastLocation == null) mLastLocation = mCurrentLocation;
 
-                if(locationResult.getLastLocation() != null && mCurrentLocation != null){
+                if (locationResult.getLastLocation() != null && mCurrentLocation != null) {
 
-                    if(!compareLocations(mLastLocation, mCurrentLocation)){
+                    if (!compareLocations(mLastLocation, mCurrentLocation)) {
 
-                        if(!compareLocations(locationResult.getLastLocation(),mCurrentLocation)) {
-                            getDistance();
+                        if (!compareLocations(locationResult.getLastLocation(), mCurrentLocation)) {
                             mLastLocation = mCurrentLocation;
                         }
                     }
                 }
-                if(!compareLocations(locationResult.getLastLocation(),mCurrentLocation)){
+                if (!compareLocations(locationResult.getLastLocation(), mCurrentLocation)) {
+                    if (getDistance(mCurrentLocation, locationResult.getLastLocation()) >= 30) {
+                        strecke += getDistance(mCurrentLocation, locationResult.getLastLocation());
+                    }
                     mCurrentLocation = locationResult.getLastLocation();
                 }
 
-
-
                 mLastUpdateTime = spf.format(new Date());
                 //updateLocationUI();
+                //saveitems();
+
+                if(strecke >= 200){
+                    GegenstandSpeicher gs = new GegenstandSpeicher(main);
+                    Toast.makeText(main, "vorher "+strecke, Toast.LENGTH_SHORT).show();
+                    gs.speicherDaten(Belohnung.belohnungeng(strecke,200));
+                    strecke = strecke%200;
+                    Toast.makeText(main, "nacher "+strecke, Toast.LENGTH_SHORT).show();
+                }
             }
         };
+
     }
 
     /**
@@ -350,20 +351,6 @@ public class LocaitonUpdates extends AppCompatActivity {
      * Sets the value of the UI fields for the location latitude, longitude and last update time.
      */
     public void updateLocationUI() {
-        if (mCurrentLocation != null) {
-            mLatitudeTextView.setText(String.format(Locale.ENGLISH, "%s: %f", mLatitudeLabel,
-                    mCurrentLocation.getLatitude()));
-            mLongitudeTextView.setText(String.format(Locale.ENGLISH, "%s: %f", mLongitudeLabel,
-                    mCurrentLocation.getLongitude()));
-            mLastUpdateTimeTextView.setText(String.format(Locale.GERMANY, "%s: %s",
-                    mLastUpdateTimeLabel, mLastUpdateTime));
-        }
-        if(mLastLocation != null){
-            mLatitudeTextView_old.setText(String.format(Locale.ENGLISH, "%s: %f", mLatitudeLabel_old,
-                    mLastLocation.getLatitude()));
-            mLongitudeTextView_old.setText(String.format(Locale.ENGLISH, "%s: %f", mLongitudeLabel_old,
-                    mLastLocation.getLongitude()));
-        }
     }
 
     /**
@@ -523,18 +510,24 @@ public class LocaitonUpdates extends AppCompatActivity {
         }
     }
 
-    public int getDistance(){
+    public int getDistance(Location last, Location current){
         float results[] = new float[2];
-        Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude()
-                ,mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude(), results);
-
-        distance.setText(String.format(Locale.ENGLISH, "%s: %d", distanceLabel,(int)results[0]));
-
-        Toast.makeText(main, (int)results[0] + " ", Toast.LENGTH_SHORT).show();
+        Location.distanceBetween(last.getLatitude(), last.getLongitude()
+                ,current.getLatitude(), current.getLongitude(), results);
         return (int)results[0];
     }
 
     private boolean compareLocations(Location l1, Location l2){
         return l1.getLatitude() == l2.getLatitude() && l1.getLongitude() == l2.getLongitude();
+    }
+
+    public void saveitems(){
+        if(strecke >= 200){
+            GegenstandSpeicher gs = new GegenstandSpeicher(this);
+            Toast.makeText(main, "vorher "+strecke, Toast.LENGTH_SHORT).show();
+            gs.speicherDaten(Belohnung.belohnungeng(strecke,200));
+            strecke = strecke%200;
+            Toast.makeText(main, "nacher "+strecke, Toast.LENGTH_SHORT).show();
+        }
     }
 }
