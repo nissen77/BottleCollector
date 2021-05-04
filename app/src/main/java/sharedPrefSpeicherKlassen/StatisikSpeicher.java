@@ -1,18 +1,14 @@
-package com.example.bottlecollector;
+package sharedPrefSpeicherKlassen;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 
-import androidx.annotation.RequiresApi;
+import com.example.bottlecollector.R;
 
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.time.format.TextStyle;
-import java.time.temporal.WeekFields;
 import java.util.Locale;
 
 public class StatisikSpeicher {
