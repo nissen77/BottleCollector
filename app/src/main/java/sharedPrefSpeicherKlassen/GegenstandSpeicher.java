@@ -33,8 +33,8 @@ public class GegenstandSpeicher {
 
     public List<String> ladeDaten(){
         List<String> erg = new ArrayList<>();
-        String inventar = sharedPref.getString(cont.getString(R.string.inventar), "Fehler!!!!");
-        if (inventar.equals("Fehelr!!!!")){
+        String inventar = sharedPref.getString(cont.getString(R.string.inventar), " Noch keine Flaschen gesammelt:(");
+        if (inventar.equals(" Noch keine Flaschen gesammelt:(")){
             erg.add(inventar);
             return erg;
         }
