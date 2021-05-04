@@ -39,11 +39,11 @@ public class GegenstandSpeicher {
             return erg;
         }
 
-        inventar = inventar.substring(1,inventar.length() - 1).trim();
+        inventar = inventar.substring(1,inventar.length() - 1);
         String [] inventarArray = inventar.split(",");
 
         for (String s : inventarArray){
-            erg.add(s);
+            erg.add(s.trim());
         }
 
         return erg;
