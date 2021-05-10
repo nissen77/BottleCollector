@@ -53,8 +53,9 @@ public class MainActivity extends AppCompatActivity {
         int woche =  date.get(weekFields.weekOfWeekBasedYear());
 
         StatisikSpeicher speicher = new StatisikSpeicher(this);
+        speicher.initSharedPref();
         speicher.setGeganeneMeterGesamt(30000);
-        speicher.setBesterTag(8342, LocalDate.of(2010, 03, 10));
+        speicher.setBesterTag(8342, LocalDate.of(2010, 3, 10));
         speicher.setBesteWoche(4200, woche, date.getYear());
         speicher.setAktuellerTag(160);
         speicher.setAktuelleWoche(1500);

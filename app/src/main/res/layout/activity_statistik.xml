@@ -11,7 +11,7 @@
         android:layout_width="292dp"
         android:layout_height="62dp"
         android:gravity="center"
-        android:text="Statstik"
+        android:text="Statistik"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

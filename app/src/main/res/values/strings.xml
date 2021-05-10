@@ -1,12 +1,16 @@
 <resources>
     <string name="app_name">BottleCollector</string>
     <string name="preference_file_key">SharedPref</string>
+
+
+    <string name="version_id">VersionId</string>
     <string name="saved_gegangene_meter_gesamt">GegangeneMeterGesamt</string>
-    <string name="best_day_date">BesterTagDatum</string>
-    <string name="best_day_meters">BesterTagMeter</string>
-    <string name="best_week">BesteWoche</string>
-    <string name="best_week_meters">BesteWocheMeter</string>
-    <string name="aktueller_tag">AktuellerTag</string>
+    <string name="bester_tag_datum">BesterTagDatum</string>
+    <string name="bester_dag_meter">BesterTagMeter</string>
+    <string name="beste_woche">BesteWoche</string>
+    <string name="beste_woche_meter">BesteWocheMeter</string>
+    <string name="aktueller_tag_meter">AktuellerTag</string>
+    <string name="aktueller_tag_datum">AktuellerTagDatum</string>
     <string name="aktuelle_woche">AktuelleWoche</string>
     <string name="inventar">Inventar</string>
 
