@@ -48,17 +48,18 @@ public class MainActivity extends AppCompatActivity {
         lu.buildLocationSettingsRequest();
 
         //Testdaten für den Speicher anlegen
-        LocalDate date = LocalDate.now();
-        WeekFields weekFields = WeekFields.of(Locale.getDefault());
-        int woche =  date.get(weekFields.weekOfWeekBasedYear());
 
         StatisikSpeicher speicher = new StatisikSpeicher(this);
         speicher.initSharedPref();
+        /*
+
+         */
         speicher.setGeganeneMeterGesamt(30000);
         speicher.setBesterTag(8342, LocalDate.of(2010, 3, 10));
-        speicher.setBesteWoche(4200, woche, date.getYear());
+        // set aktuelle woche muss vor aktueller tag aufgerufen werden
+        speicher.setAktuelleWoche(150);
         speicher.setAktuellerTag(160);
-        speicher.setAktuelleWoche(1500);
+
     }
 
     public void sendMessage(View view){

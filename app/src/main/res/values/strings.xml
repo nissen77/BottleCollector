@@ -4,13 +4,14 @@
 
 
     <string name="version_id">VersionId</string>
-    <string name="saved_gegangene_meter_gesamt">GegangeneMeterGesamt</string>
+    <string name="gegangene_meter_gesamt">GegangeneMeterGesamt</string>
     <string name="bester_tag_datum">BesterTagDatum</string>
     <string name="bester_dag_meter">BesterTagMeter</string>
     <string name="beste_woche">BesteWoche</string>
     <string name="beste_woche_meter">BesteWocheMeter</string>
     <string name="aktueller_tag_meter">AktuellerTag</string>
     <string name="aktueller_tag_datum">AktuellerTagDatum</string>
+    <string name="aktuelle_woche_meter">AktuelleWocheMeter</string>
     <string name="aktuelle_woche">AktuelleWoche</string>
     <string name="inventar">Inventar</string>
 

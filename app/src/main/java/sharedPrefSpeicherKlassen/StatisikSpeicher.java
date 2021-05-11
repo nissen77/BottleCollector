@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 import com.example.bottlecollector.R;
 
 import java.text.NumberFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.time.temporal.WeekFields;
 import java.util.Locale;
 
 public class StatisikSpeicher {
@@ -27,8 +29,12 @@ public class StatisikSpeicher {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putInt(cont.getString(R.string.version_id), 1);
 
+            LocalDate date = LocalDate.now();
+            WeekFields weekFields = WeekFields.ISO;
+            int woche =  date.get(weekFields.weekOfWeekBasedYear());
+
             if(!sharedPref.contains(cont.getString(R.string.beste_woche)) || !sharedPref.contains(cont.getString(R.string.beste_woche_meter))){
-                editor.putString(cont.getString(R.string.beste_woche), "Jahr:0 Woche:0");
+                editor.putString(cont.getString(R.string.beste_woche), "Jahr:"+LocalDate.now().getYear()+" Woche:"+woche);
                 editor.putInt(cont.getString(R.string.beste_woche_meter),0);
             }
 
@@ -36,8 +42,13 @@ public class StatisikSpeicher {
                 editor.putInt(cont.getString(R.string.aktueller_tag_meter), 0);
             }
 
-            if(!sharedPref.contains(cont.getString(R.string.aktuelle_woche))){
-                editor.putInt(cont.getString(R.string.aktuelle_woche), 0);
+            if(!sharedPref.contains(cont.getString(R.string.aktuelle_woche_meter)) || !sharedPref.contains(cont.getString(R.string.aktuelle_woche))){
+                editor.putString(cont.getString(R.string.aktuelle_woche_meter), "0 0 0 0 0 0 0");
+                editor.putInt(cont.getString(R.string.aktuelle_woche), woche);
+            }
+
+            if(!sharedPref.contains(cont.getString(R.string.gegangene_meter_gesamt))){
+                editor.putInt(cont.getString(R.string.gegangene_meter_gesamt), 0);
             }
 
             editor.apply();
@@ -47,7 +58,8 @@ public class StatisikSpeicher {
     // Setter für die Statistikwerte
     public void setGeganeneMeterGesamt(int strecke){
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(cont.getString(R.string.saved_gegangene_meter_gesamt), strecke);
+        strecke += sharedPref.getInt(cont.getString(R.string.gegangene_meter_gesamt), 0);
+        editor.putInt(cont.getString(R.string.gegangene_meter_gesamt), strecke);
         editor.apply();
     }
 
@@ -60,10 +72,11 @@ public class StatisikSpeicher {
         }
     }
 
-    public void setBesteWoche(int strecke, int woche, int jahr){
+    public void setBesteWoche(int strecke, int woche){
         SharedPreferences.Editor editor = sharedPref.edit();
         if(strecke > getBesteWocheMeter()){
-            editor.putString(cont.getString(R.string.beste_woche), "Jahr:"+jahr+" Woche:"+woche);
+
+            editor.putString(cont.getString(R.string.beste_woche), "Jahr:"+LocalDate.now().getYear()+" Woche:"+woche);
             editor.putInt(cont.getString(R.string.beste_woche_meter),strecke);
             editor.apply();
         }
@@ -72,22 +85,52 @@ public class StatisikSpeicher {
     public void setAktuellerTag(int strecke){
         SharedPreferences.Editor editor = sharedPref.edit();
         if(LocalDate.parse(getAktuellerTagDatum()) != LocalDate.now()){
+            setBesterTag(sharedPref.getInt(cont.getString(R.string.aktueller_tag_meter), 0), LocalDate.parse(sharedPref.getString(cont.getString(R.string.aktueller_tag_datum), LocalDate.now().toString())));
             editor.putInt(cont.getString(R.string.aktueller_tag_meter), 0);
             editor.putString(cont.getString(R.string.aktueller_tag_datum), LocalDate.now().toString());
+            editor.apply();
         }
         editor.putInt(cont.getString(R.string.aktueller_tag_meter), strecke);
         editor.apply();
     }
 
     public void setAktuelleWoche(int strecke){
+        LocalDate date = LocalDate.now();
+        WeekFields weekFields = WeekFields.ISO;
+        int woche =  date.get(weekFields.weekOfWeekBasedYear());
+
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(cont.getString(R.string.aktuelle_woche), strecke);
+        // prüft ob eine neue woche begonnen hat
+        if(woche != sharedPref.getInt(cont.getString(R.string.aktuelle_woche), 0)
+                || LocalDate.parse(sharedPref.getString(cont.getString(R.string.aktueller_tag_datum), date.toString())).getYear() != date.getYear()){
+            setBesteWoche(Integer.parseInt(getAktuelleWoche().split("m")[0]), sharedPref.getInt(cont.getString(R.string.aktuelle_woche), 0));
+            editor.putString(cont.getString(R.string.aktuelle_woche_meter), "0 0 0 0 0 0 0");
+            editor.putInt(cont.getString(R.string.aktuelle_woche), woche);
+            editor.apply();
+        }
+
+        // holt den wert des aktuellen tages und addiert die strecke drauf
+        // speichert die daten wieder
+        int tag = date.getDayOfWeek().getValue();
+        String [] val = sharedPref.getString(cont.getString(R.string.aktuelle_woche_meter), "0").split(" ");
+        int aktTag = Integer.parseInt(val[tag-1]) + strecke;
+        val[tag-1] = Integer.toString(aktTag);
+
+        StringBuilder sb = new StringBuilder();
+
+        for(String s : val){
+            sb.append(s);
+            sb.append(" ");
+        }
+
+        editor.putString(cont.getString(R.string.aktuelle_woche_meter), sb.toString());
         editor.apply();
+
     }
 
     // Getter für die Statistikwerte
     public String getGegangeneMeterGesamt(){
-        int highScore = sharedPref.getInt(cont.getString(R.string.saved_gegangene_meter_gesamt),0);
+        int highScore = sharedPref.getInt(cont.getString(R.string.gegangene_meter_gesamt),0);
         return nf.format(highScore)+"m";
     }
 
@@ -104,7 +147,12 @@ public class StatisikSpeicher {
     }
 
     public String getAktuelleWoche(){
-        return nf.format(sharedPref.getInt(cont.getString(R.string.aktuelle_woche), 0))+"m";
+        int sum = 0;
+        String [] erg = sharedPref.getString(cont.getString(R.string.aktuelle_woche_meter), "0").split(" ");
+        for (String s : erg){
+            sum += Integer.parseInt(s);
+        }
+        return nf.format(sum)+"m";
     }
 
     // Hilfs Funktionen
