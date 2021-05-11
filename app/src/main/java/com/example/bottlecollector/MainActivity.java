@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
          */
         speicher.setGeganeneMeterGesamt(30000);
-        speicher.setBesterTag(8342, LocalDate.of(2010, 3, 10));
         // set aktuelle woche muss vor aktueller tag aufgerufen werden
         speicher.setAktuelleWoche(150);
         speicher.setAktuellerTag(160);

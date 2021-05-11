@@ -63,7 +63,7 @@ public class StatisikSpeicher {
         editor.apply();
     }
 
-    public void setBesterTag(int strecke, LocalDate tag){
+    private void setBesterTag(int strecke, LocalDate tag){
         SharedPreferences.Editor editor = sharedPref.edit();
         if(strecke > getBesterTagMeter()){
             editor.putInt(cont.getString(R.string.bester_dag_meter), strecke);
@@ -72,7 +72,7 @@ public class StatisikSpeicher {
         }
     }
 
-    public void setBesteWoche(int strecke, int woche){
+    private void setBesteWoche(int strecke, int woche){
         SharedPreferences.Editor editor = sharedPref.edit();
         if(strecke > getBesteWocheMeter()){
 
