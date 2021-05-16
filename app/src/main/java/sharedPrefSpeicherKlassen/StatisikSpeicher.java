@@ -38,8 +38,9 @@ public class StatisikSpeicher {
                 editor.putInt(cont.getString(R.string.beste_woche_meter),0);
             }
 
-            if(!sharedPref.contains(cont.getString(R.string.aktueller_tag_meter))){
+            if(!sharedPref.contains(cont.getString(R.string.aktueller_tag_meter)) || !sharedPref.contains(cont.getString(R.string.aktueller_tag_datum))){
                 editor.putInt(cont.getString(R.string.aktueller_tag_meter), 0);
+                editor.putString(cont.getString(R.string.aktueller_tag_datum), LocalDate.now().toString());
             }
 
             if(!sharedPref.contains(cont.getString(R.string.aktuelle_woche_meter)) || !sharedPref.contains(cont.getString(R.string.aktuelle_woche))){
