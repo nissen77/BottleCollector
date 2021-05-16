@@ -84,7 +84,7 @@ public class StatisikSpeicher {
 
     public void setAktuellerTag(int strecke){
         SharedPreferences.Editor editor = sharedPref.edit();
-        if(LocalDate.parse(getAktuellerTagDatum()) != LocalDate.now()){
+        if(LocalDate.parse(getAktuellerTagDatum()).isEqual(LocalDate.now())){
             setBesterTag(sharedPref.getInt(cont.getString(R.string.aktueller_tag_meter), 0), LocalDate.parse(getAktuellerTagDatum()));
             editor.putInt(cont.getString(R.string.aktueller_tag_meter), 0);
             editor.putString(cont.getString(R.string.aktueller_tag_datum), LocalDate.now().toString());
