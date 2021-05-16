@@ -27,7 +27,7 @@ public class ListActivity extends AppCompatActivity {
         GegenstandSpeicher speicher = new GegenstandSpeicher(this);
 
         //Liste holen und anzeigen
-        speicher.speicherDaten(Belohnung.belohnungeng(600, 200));
+        //speicher.speicherDaten(Belohnung.belohnungeng(600, 200));
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, speicher.ladeDaten());
         ListView listView = (ListView) findViewById(R.id.ausgabe);
         listView.setAdapter(adapter);

@@ -45,6 +45,7 @@ import java.util.Locale;
 
 import belohnungsKlassen.Belohnung;
 import sharedPrefSpeicherKlassen.GegenstandSpeicher;
+import sharedPrefSpeicherKlassen.StatisikSpeicher;
 
 public class LocaitonUpdates extends AppCompatActivity {
 
@@ -130,6 +131,7 @@ public class LocaitonUpdates extends AppCompatActivity {
     public Activity main;
 
     private int strecke = 0;
+    private int strecke_statistik = 0;
     //=======================================
     //      Methods
     //=======================================
@@ -201,7 +203,6 @@ public class LocaitonUpdates extends AppCompatActivity {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
-                SimpleDateFormat spf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
 
                 if (mCurrentLocation == null) mCurrentLocation = locationResult.getLastLocation();
                 if (mLastLocation == null) mLastLocation = mCurrentLocation;
@@ -218,11 +219,11 @@ public class LocaitonUpdates extends AppCompatActivity {
                 if (!compareLocations(locationResult.getLastLocation(), mCurrentLocation)) {
                     if (getDistance(mCurrentLocation, locationResult.getLastLocation()) >= 30) {
                         strecke += getDistance(mCurrentLocation, locationResult.getLastLocation());
+                        strecke_statistik += getDistance(mCurrentLocation, locationResult.getLastLocation());
                     }
                     mCurrentLocation = locationResult.getLastLocation();
                 }
 
-                mLastUpdateTime = spf.format(new Date());
                 //updateLocationUI();
                 //saveitems();
 
@@ -395,6 +396,12 @@ public class LocaitonUpdates extends AppCompatActivity {
 
         // Remove location updates to save battery.
         stopLocationUpdates();
+        StatisikSpeicher ss = new StatisikSpeicher(main);
+        ss.setGeganeneMeterGesamt(strecke_statistik);
+        ss.setAktuellerTag(strecke_statistik);
+        ss.setAktuelleWoche(strecke_statistik);
+        strecke_statistik = 0;
+
     }
 
     /**
