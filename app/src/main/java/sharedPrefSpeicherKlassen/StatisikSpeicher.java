@@ -56,6 +56,29 @@ public class StatisikSpeicher {
         }
     }
 
+    public void checkDate(){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        LocalDate date = LocalDate.now();
+        WeekFields weekFields = WeekFields.ISO;
+        int woche =  date.get(weekFields.weekOfWeekBasedYear());
+
+        // prüft ob eine neue Woche begonnen hat
+        if(woche != sharedPref.getInt(cont.getString(R.string.aktuelle_woche), 0)
+                || LocalDate.parse(getAktuellerTagDatum()).getYear() != date.getYear()){
+            setBesteWoche(getAktuelleWocheMeter(), sharedPref.getInt(cont.getString(R.string.aktuelle_woche), 0));
+            editor.putString(cont.getString(R.string.aktuelle_woche_meter), "0 0 0 0 0 0 0");
+            editor.putInt(cont.getString(R.string.aktuelle_woche), woche);
+            editor.apply();
+        }
+        // prüft ob ein neuer Tag begonnen hat
+        if(!LocalDate.parse(getAktuellerTagDatum()).isEqual(LocalDate.now())){
+            setBesterTag(sharedPref.getInt(cont.getString(R.string.aktueller_tag_meter), 0), LocalDate.parse(getAktuellerTagDatum()));
+            editor.putInt(cont.getString(R.string.aktueller_tag_meter), 0);
+            editor.putString(cont.getString(R.string.aktueller_tag_datum), LocalDate.now().toString());
+            editor.apply();
+        }
+    }
+
     // Setter für die Statistikwerte
     public void setGeganeneMeterGesamt(int strecke){
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -85,12 +108,7 @@ public class StatisikSpeicher {
 
     public void setAktuellerTag(int strecke){
         SharedPreferences.Editor editor = sharedPref.edit();
-        if(!LocalDate.parse(getAktuellerTagDatum()).isEqual(LocalDate.now())){
-            setBesterTag(sharedPref.getInt(cont.getString(R.string.aktueller_tag_meter), 0), LocalDate.parse(getAktuellerTagDatum()));
-            editor.putInt(cont.getString(R.string.aktueller_tag_meter), 0);
-            editor.putString(cont.getString(R.string.aktueller_tag_datum), LocalDate.now().toString());
-            editor.apply();
-        }
+        checkDate();
         int sum = sharedPref.getInt(cont.getString(R.string.aktueller_tag_meter), 0) + strecke;
         editor.putInt(cont.getString(R.string.aktueller_tag_meter), sum);
         editor.apply();
@@ -102,14 +120,8 @@ public class StatisikSpeicher {
         int woche =  date.get(weekFields.weekOfWeekBasedYear());
 
         SharedPreferences.Editor editor = sharedPref.edit();
-        // prüft ob eine neue woche begonnen hat
-        if(woche != sharedPref.getInt(cont.getString(R.string.aktuelle_woche), 0)
-                || LocalDate.parse(getAktuellerTagDatum()).getYear() != date.getYear()){
-            setBesteWoche(getAktuelleWocheMeter(), sharedPref.getInt(cont.getString(R.string.aktuelle_woche), 0));
-            editor.putString(cont.getString(R.string.aktuelle_woche_meter), "0 0 0 0 0 0 0");
-            editor.putInt(cont.getString(R.string.aktuelle_woche), woche);
-            editor.apply();
-        }
+
+        checkDate();
 
         // holt den wert des aktuellen tages und addiert die strecke drauf
         // speichert die daten wieder

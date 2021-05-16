@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         StatisikSpeicher speicher = new StatisikSpeicher(this);
         speicher.initSharedPref();
-
+        speicher.checkDate();
 
         //speicher.setGeganeneMeterGesamt(30000);
         // set aktuelle woche muss vor aktueller tag aufgerufen werden
