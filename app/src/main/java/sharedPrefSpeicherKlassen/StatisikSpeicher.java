@@ -90,7 +90,8 @@ public class StatisikSpeicher {
             editor.putString(cont.getString(R.string.aktueller_tag_datum), LocalDate.now().toString());
             editor.apply();
         }
-        editor.putInt(cont.getString(R.string.aktueller_tag_meter), strecke);
+        int sum = sharedPref.getInt(cont.getString(R.string.aktueller_tag_meter), 0) + strecke;
+        editor.putInt(cont.getString(R.string.aktueller_tag_meter), sum);
         editor.apply();
     }
 
