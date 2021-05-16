@@ -105,7 +105,7 @@ public class StatisikSpeicher {
         // prüft ob eine neue woche begonnen hat
         if(woche != sharedPref.getInt(cont.getString(R.string.aktuelle_woche), 0)
                 || LocalDate.parse(getAktuellerTagDatum()).getYear() != date.getYear()){
-            setBesteWoche(Integer.parseInt(getAktuelleWoche().split("m")[0]), sharedPref.getInt(cont.getString(R.string.aktuelle_woche), 0));
+            setBesteWoche(getAktuelleWocheMeter(), sharedPref.getInt(cont.getString(R.string.aktuelle_woche), 0));
             editor.putString(cont.getString(R.string.aktuelle_woche_meter), "0 0 0 0 0 0 0");
             editor.putInt(cont.getString(R.string.aktuelle_woche), woche);
             editor.apply();
@@ -149,12 +149,7 @@ public class StatisikSpeicher {
     }
 
     public String getAktuelleWoche(){
-        int sum = 0;
-        String [] erg = sharedPref.getString(cont.getString(R.string.aktuelle_woche_meter), "0").split(" ");
-        for (String s : erg){
-            sum += Integer.parseInt(s);
-        }
-        return nf.format(sum)+"m";
+        return nf.format(getAktuelleWocheMeter())+"m";
     }
 
     // Hilfs Funktionen
@@ -172,6 +167,15 @@ public class StatisikSpeicher {
 
     private String getAktuellerTagDatum(){
         return sharedPref.getString(cont.getString(R.string.aktueller_tag_datum), LocalDate.now().toString());
+    }
+
+    private int getAktuelleWocheMeter(){
+        int sum = 0;
+        String [] erg = sharedPref.getString(cont.getString(R.string.aktuelle_woche_meter), "0").split(" ");
+        for (String s : erg){
+            sum += Integer.parseInt(s);
+        }
+        return sum;
     }
 
 }
