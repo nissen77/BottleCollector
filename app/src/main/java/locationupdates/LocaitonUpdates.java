@@ -224,15 +224,9 @@ public class LocaitonUpdates extends AppCompatActivity {
                     mCurrentLocation = locationResult.getLastLocation();
                 }
 
-                //updateLocationUI();
-                //saveitems();
 
                 if(strecke >= 200){
-                    GegenstandSpeicher gs = new GegenstandSpeicher(main);
-                    Toast.makeText(main, "vorher "+strecke, Toast.LENGTH_SHORT).show();
-                    gs.speicherDaten(Belohnung.belohnungeng(strecke,200));
-                    strecke = strecke%200;
-                    Toast.makeText(main, "nacher "+strecke, Toast.LENGTH_SHORT).show();
+                    saveitems();
                 }
             }
         };
@@ -396,11 +390,6 @@ public class LocaitonUpdates extends AppCompatActivity {
 
         // Remove location updates to save battery.
         stopLocationUpdates();
-        StatisikSpeicher ss = new StatisikSpeicher(main);
-        ss.setGeganeneMeterGesamt(strecke_statistik);
-        ss.setAktuellerTag(strecke_statistik);
-        ss.setAktuelleWoche(strecke_statistik);
-        strecke_statistik = 0;
 
     }
 
@@ -530,11 +519,15 @@ public class LocaitonUpdates extends AppCompatActivity {
 
     public void saveitems(){
         if(strecke >= 200){
-            GegenstandSpeicher gs = new GegenstandSpeicher(this);
-            Toast.makeText(main, "vorher "+strecke, Toast.LENGTH_SHORT).show();
+            GegenstandSpeicher gs = new GegenstandSpeicher(main);
             gs.speicherDaten(Belohnung.belohnungeng(strecke,200));
             strecke = strecke%200;
-            Toast.makeText(main, "nacher "+strecke, Toast.LENGTH_SHORT).show();
+
+            StatisikSpeicher ss = new StatisikSpeicher(main);
+            ss.setGeganeneMeterGesamt(strecke_statistik);
+            ss.setAktuellerTag(strecke_statistik);
+            ss.setAktuelleWoche(strecke_statistik);
+            strecke_statistik = 0;
         }
     }
 }
