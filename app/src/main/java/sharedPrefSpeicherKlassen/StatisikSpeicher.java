@@ -85,7 +85,7 @@ public class StatisikSpeicher {
     public void setAktuellerTag(int strecke){
         SharedPreferences.Editor editor = sharedPref.edit();
         if(LocalDate.parse(getAktuellerTagDatum()) != LocalDate.now()){
-            setBesterTag(sharedPref.getInt(cont.getString(R.string.aktueller_tag_meter), 0), LocalDate.parse(sharedPref.getString(cont.getString(R.string.aktueller_tag_datum), LocalDate.now().toString())));
+            setBesterTag(sharedPref.getInt(cont.getString(R.string.aktueller_tag_meter), 0), LocalDate.parse(getAktuellerTagDatum()));
             editor.putInt(cont.getString(R.string.aktueller_tag_meter), 0);
             editor.putString(cont.getString(R.string.aktueller_tag_datum), LocalDate.now().toString());
             editor.apply();
@@ -102,7 +102,7 @@ public class StatisikSpeicher {
         SharedPreferences.Editor editor = sharedPref.edit();
         // prüft ob eine neue woche begonnen hat
         if(woche != sharedPref.getInt(cont.getString(R.string.aktuelle_woche), 0)
-                || LocalDate.parse(sharedPref.getString(cont.getString(R.string.aktueller_tag_datum), date.toString())).getYear() != date.getYear()){
+                || LocalDate.parse(getAktuellerTagDatum()).getYear() != date.getYear()){
             setBesteWoche(Integer.parseInt(getAktuelleWoche().split("m")[0]), sharedPref.getInt(cont.getString(R.string.aktuelle_woche), 0));
             editor.putString(cont.getString(R.string.aktuelle_woche_meter), "0 0 0 0 0 0 0");
             editor.putInt(cont.getString(R.string.aktuelle_woche), woche);
