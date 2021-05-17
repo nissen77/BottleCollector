@@ -87,25 +87,6 @@ public class StatisikSpeicher {
         editor.apply();
     }
 
-    private void setBesterTag(int strecke, LocalDate tag){
-        SharedPreferences.Editor editor = sharedPref.edit();
-        if(strecke > getBesterTagMeter()){
-            editor.putInt(cont.getString(R.string.bester_dag_meter), strecke);
-            editor.putString(cont.getString(R.string.bester_tag_datum), tag.toString());
-            editor.apply();
-        }
-    }
-
-    private void setBesteWoche(int strecke, int woche){
-        SharedPreferences.Editor editor = sharedPref.edit();
-        if(strecke > getBesteWocheMeter()){
-
-            editor.putString(cont.getString(R.string.beste_woche), "Jahr:"+LocalDate.now().getYear()+" Woche:"+woche);
-            editor.putInt(cont.getString(R.string.beste_woche_meter),strecke);
-            editor.apply();
-        }
-    }
-
     public void setAktuellerTag(int strecke){
         SharedPreferences.Editor editor = sharedPref.edit();
         checkDate();
@@ -142,25 +123,44 @@ public class StatisikSpeicher {
 
     }
 
-    // Getter für die Statistikwerte
-    public String getGegangeneMeterGesamt(){
+    private void setBesterTag(int strecke, LocalDate tag){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        if(strecke > getBesterTagMeter()){
+            editor.putInt(cont.getString(R.string.bester_dag_meter), strecke);
+            editor.putString(cont.getString(R.string.bester_tag_datum), tag.toString());
+            editor.apply();
+        }
+    }
+
+    private void setBesteWoche(int strecke, int woche){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        if(strecke > getBesteWocheMeter()){
+
+            editor.putString(cont.getString(R.string.beste_woche), "Jahr:"+LocalDate.now().getYear()+" Woche:"+woche);
+            editor.putInt(cont.getString(R.string.beste_woche_meter),strecke);
+            editor.apply();
+        }
+    }
+
+    // Liefert die Werte für die Statistik Seite als Formatierte String zurück
+    public String getGegangeneMeterGesamtFS(){
         int highScore = sharedPref.getInt(cont.getString(R.string.gegangene_meter_gesamt),0);
         return nf.format(highScore)+"m";
     }
 
-    public String getBesterTag(){
+    public String getBesterTagFS(){
         return getBesterTagDatum().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(Locale.getDefault()))+ System.lineSeparator() +nf.format(getBesterTagMeter())+"m";
     }
 
-    public String getBesteWoche(){
+    public String getBesteWocheFS(){
         return sharedPref.getString(cont.getString(R.string.beste_woche), "Noch kein Highscore!") + System.lineSeparator() +nf.format(sharedPref.getInt(cont.getString(R.string.beste_woche_meter),0))+"m";
     }
 
-    public String getAktuellerTag(){
+    public String getAktuellerTagFS(){
         return nf.format(sharedPref.getInt(cont.getString(R.string.aktueller_tag_meter), 0))+"m";
     }
 
-    public String getAktuelleWoche(){
+    public String getAktuelleWocheFS(){
         return nf.format(getAktuelleWocheMeter())+"m";
     }
 

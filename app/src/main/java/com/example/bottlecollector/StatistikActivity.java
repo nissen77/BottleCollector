@@ -19,18 +19,18 @@ public class StatistikActivity extends AppCompatActivity {
         StatisikSpeicher speicher = new StatisikSpeicher(this);
 
         TextView textView = findViewById(R.id.kilometerGesamt);
-        textView.setText(speicher.getGegangeneMeterGesamt());
+        textView.setText(speicher.getGegangeneMeterGesamtFS());
 
         textView = findViewById(R.id.besterTag);
-        textView.setText(speicher.getBesterTag());
+        textView.setText(speicher.getBesterTagFS());
 
         textView = findViewById(R.id.besteWoche);
-        textView.setText(speicher.getBesteWoche());
+        textView.setText(speicher.getBesteWocheFS());
 
         textView = findViewById(R.id.aktuellerTag);
-        textView.setText(speicher.getAktuellerTag());
+        textView.setText(speicher.getAktuellerTagFS());
 
         textView = findViewById(R.id.aktuelleWoche);
-        textView.setText(speicher.getAktuelleWoche());
+        textView.setText(speicher.getAktuelleWocheFS());
     }
 }
