@@ -16,7 +16,7 @@ public class StatistikActivity extends AppCompatActivity {
         setContentView(R.layout.activity_statistik);
 
         Intent intent = getIntent();
-        StatisikSpeicher speicher = new StatisikSpeicher(this);
+        StatisikSpeicher speicher = StatisikSpeicher.getInstance(this);
 
         TextView textView = findViewById(R.id.kilometerGesamt);
         textView.setText(speicher.getGegangeneMeterGesamtFS());

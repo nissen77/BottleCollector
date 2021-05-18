@@ -15,13 +15,21 @@ import java.util.Locale;
 
 public class StatisikSpeicher {
 
-    SharedPreferences sharedPref;
-    Context cont;
-    NumberFormat nf = NumberFormat.getInstance();
+    private static  StatisikSpeicher instance;
+    private SharedPreferences sharedPref;
+    private Context cont;
+    private NumberFormat nf = NumberFormat.getInstance();
 
-    public StatisikSpeicher(Context cont){
+    private StatisikSpeicher(Context cont){
         sharedPref = cont.getSharedPreferences(cont.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         this.cont = cont;
+    }
+
+    public static StatisikSpeicher getInstance(Context cont){
+        if(instance == null){
+            instance = new StatisikSpeicher(cont);
+        }
+        return instance;
     }
 
     public void initSharedPref(){

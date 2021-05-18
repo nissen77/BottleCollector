@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Testdaten für den Speicher anlegen
 
-        StatisikSpeicher speicher = new StatisikSpeicher(this);
+        StatisikSpeicher speicher = StatisikSpeicher.getInstance(this);
         speicher.initSharedPref();
         speicher.checkDate();
 

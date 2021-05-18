@@ -24,7 +24,7 @@ public class ListActivity extends AppCompatActivity {
 
         //Gegenstandspeicher initialisieren
 
-        GegenstandSpeicher speicher = new GegenstandSpeicher(this);
+        GegenstandSpeicher speicher = GegenstandSpeicher.getInstance(this);
 
         //Liste holen und anzeigen
         //speicher.speicherDaten(Belohnung.belohnungeng(600, 200));

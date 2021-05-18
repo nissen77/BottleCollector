@@ -13,13 +13,21 @@ import belohnungsKlassen.Belohnung;
 
 public class GegenstandSpeicher {
 
-    SharedPreferences sharedPref;
-    Context cont;
-    NumberFormat nf = NumberFormat.getInstance();
+    private  static GegenstandSpeicher instance;
+    private SharedPreferences sharedPref;
+    private Context cont;
+    private NumberFormat nf = NumberFormat.getInstance();
 
-    public GegenstandSpeicher(Context cont){
+    private GegenstandSpeicher(Context cont){
         this.sharedPref = cont.getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE);
         this.cont = cont;
+    }
+
+    public static GegenstandSpeicher getInstance(Context cont){
+        if(instance == null){
+            instance = new GegenstandSpeicher(cont);
+        }
+        return instance;
     }
 
     public void speicherDaten(List<String> gegenstaende){

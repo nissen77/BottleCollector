@@ -519,11 +519,11 @@ public class LocaitonUpdates extends AppCompatActivity {
 
     public void saveitems(){
         if(strecke >= 200){
-            GegenstandSpeicher gs = new GegenstandSpeicher(main);
+            GegenstandSpeicher gs = GegenstandSpeicher.getInstance(main);
             gs.speicherDaten(Belohnung.belohnungeng(strecke,200));
             strecke = strecke%200;
 
-            StatisikSpeicher ss = new StatisikSpeicher(main);
+            StatisikSpeicher ss = StatisikSpeicher.getInstance(main);
             ss.setGeganeneMeterGesamt(strecke_statistik);
             ss.setAktuellerTag(strecke_statistik);
             ss.setAktuelleWoche(strecke_statistik);
