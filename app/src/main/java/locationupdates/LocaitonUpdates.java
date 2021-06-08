@@ -39,10 +39,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import belohnungsKlassen.Belohnung;
 import sharedPrefSpeicherKlassen.GegenstandSpeicher;
 import sharedPrefSpeicherKlassen.StatisikSpeicher;
@@ -130,8 +126,10 @@ public class LocaitonUpdates extends AppCompatActivity {
 
     public Activity main;
 
-    private int strecke = 0;
-    private int strecke_statistik = 0;
+    private int distance = 0;
+    private int distance_statistics = 0;
+    private int rollDistance = 200;
+    private int shiverProtection = 30;
     //=======================================
     //      Methods
     //=======================================
@@ -217,15 +215,15 @@ public class LocaitonUpdates extends AppCompatActivity {
                     }
                 }
                 if (!compareLocations(locationResult.getLastLocation(), mCurrentLocation)) {
-                    if (getDistance(mCurrentLocation, locationResult.getLastLocation()) >= 30) {
-                        strecke += getDistance(mCurrentLocation, locationResult.getLastLocation());
-                        strecke_statistik += getDistance(mCurrentLocation, locationResult.getLastLocation());
+                    if (getDistance(mCurrentLocation, locationResult.getLastLocation()) >= shiverProtection) {
+                        distance += getDistance(mCurrentLocation, locationResult.getLastLocation());
+                        distance_statistics += getDistance(mCurrentLocation, locationResult.getLastLocation());
                     }
                     mCurrentLocation = locationResult.getLastLocation();
                 }
 
 
-                if(strecke >= 200){
+                if(distance >= rollDistance){
                     saveitems();
                 }
             }
@@ -518,16 +516,16 @@ public class LocaitonUpdates extends AppCompatActivity {
     }
 
     public void saveitems(){
-        if(strecke >= 200){
+        if(distance >= rollDistance){
             GegenstandSpeicher gs = GegenstandSpeicher.getInstance(main);
-            gs.speicherDaten(Belohnung.belohnungeng(strecke,200));
-            strecke = strecke%200;
+            gs.speicherDaten(Belohnung.belohnungeng(distance,rollDistance));
+            distance = distance %rollDistance;
 
             StatisikSpeicher ss = StatisikSpeicher.getInstance(main);
-            ss.setGeganeneMeterGesamt(strecke_statistik);
-            ss.setAktuellerTag(strecke_statistik);
-            ss.setAktuelleWoche(strecke_statistik);
-            strecke_statistik = 0;
+            ss.setGeganeneMeterGesamt(distance_statistics);
+            ss.setAktuellerTag(distance_statistics);
+            ss.setAktuelleWoche(distance_statistics);
+            distance_statistics = 0;
         }
     }
 }
