@@ -4,37 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00FFFFFF"
     tools:context=".MainActivity">
-
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/wanderweg"
         android:gravity="bottom"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
-            android:layout_height="342dp"
+            android:layout_height="493dp"
             android:text="Wilkommen"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="40dp" />
 
         <Button
             android:id="@+id/btn_Weiter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
+            android:alpha="100"
+            android:background="?android:attr/selectableItemBackground"
             android:onClick="startUpdatesButtonHandler"
-            android:text="Weiter" />
+            android:text="WEITER"
+            android:textColor="#ffff"
+            android:textSize="30dp" />
+
         <Button
             android:id="@+id/btn_stop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:onClick="stopUpdatesButtonHandler"
-            android:text="STOP UPDATES" />
+            android:text="STOP UPDATES"
+            android:visibility="invisible" />
 
     </LinearLayout>
 
