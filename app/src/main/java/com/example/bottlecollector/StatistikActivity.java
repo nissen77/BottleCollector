@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -49,6 +50,7 @@ public class StatistikActivity extends AppCompatActivity {
 
         final TextView hs_user = findViewById(R.id.hs_user);
         final TextView hs_wert = findViewById(R.id.hs_wert);
+        final TextView error_msg = findViewById(R.id.error_msg);
 
         String url = "http://10.0.207.13:8080/BottleCollectorREST/rest/benutzer/highscore/";
         queue = Volley.newRequestQueue(this);
@@ -60,17 +62,19 @@ public class StatistikActivity extends AppCompatActivity {
                         //test.setText("Respone: " + response.toString());
                         // einen einzelnen wert holen
                         try {
+                            error_msg.setText("");
                             hs_user.setText("Benutzer: "+response.getString("username"));
                             hs_wert.setText(response.getString("highscore")+"m");
                         } catch (JSONException e) {
-                            hs_wert.setText(e.toString());
+                            hs_wert.setText("");
+                            hs_user.setText("");
                         }
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        hs_user.setText("That didn't work!\n" + error.toString());
+                        error_msg.setText("503 Server nicht verfügbar");
 
                     }
                 });

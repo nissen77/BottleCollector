@@ -167,7 +167,6 @@
         android:layout_height="36dp"
         android:gravity="center|left"
         android:paddingStart="10px"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.181"
@@ -176,12 +175,24 @@
         app:layout_constraintVertical_bias="0.604" />
 
     <TextView
+        android:id="@+id/error_msg"
+        android:layout_width="330dp"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:paddingStart="10px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.604"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.849" />
+
+    <TextView
         android:id="@+id/hs_wert"
         android:layout_width="152dp"
         android:layout_height="36dp"
         android:gravity="center|left"
         android:paddingStart="10px"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.872"
