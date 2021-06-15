@@ -1,5 +1,7 @@
 package belohnungsKlassen;
 
+import com.example.bottlecollector.ListActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class Belohnung {
             for (Gegenstand g : items) {
                 if (g.getDropChance() * bonusChance  >= Math.random() * 100) {
                     beute.add(g.getBezeichnung());
+                    ListActivity.wert += g.getWertInCt();
                 }
             }
         }

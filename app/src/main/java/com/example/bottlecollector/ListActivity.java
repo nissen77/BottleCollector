@@ -17,6 +17,9 @@ import sharedPrefSpeicherKlassen.GegenstandSpeicher;
 
 public class ListActivity extends AppCompatActivity {
 
+    static public int wert = 0;
+    double wertGerundet = 0;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +30,14 @@ public class ListActivity extends AppCompatActivity {
         GegenstandSpeicher speicher = GegenstandSpeicher.getInstance(this);
 
         //Liste holen und anzeigen
-        //speicher.speicherDaten(Belohnung.belohnungeng(600, 200));
+        speicher.speicherDaten(Belohnung.belohnungeng(600, 200));
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, speicher.ladeDaten());
         ListView listView = (ListView) findViewById(R.id.ausgabe);
         listView.setAdapter(adapter);
+        TextView gesamtWert = (TextView) findViewById(R.id.gesamtwert);
+        wertGerundet = wert / 100.0;
+        gesamtWert.setText("Gesamtwert: "+ wertGerundet +"€");
+
 
     }
 

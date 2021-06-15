@@ -15,6 +15,8 @@
     <string name="aktuelle_woche">AktuelleWoche</string>
     <string name="inventar">Inventar</string>
 
+    <string name="gesamtwert">gesamtwert</string>
+
 
     <string name="latitude_label">Latitude</string>
     <string name="longitude_label">Longitude</string>

@@ -3,6 +3,7 @@ package sharedPrefSpeicherKlassen;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.bottlecollector.ListActivity;
 import com.example.bottlecollector.R;
 
 import java.text.NumberFormat;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import belohnungsKlassen.Belohnung;
+import belohnungsKlassen.Gegenstand;
 
 public class GegenstandSpeicher {
 
