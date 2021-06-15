@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.bottlecollector.BuildConfig;
+import com.example.bottlecollector.ListActivity;
 import com.example.bottlecollector.MainActivity;
 import com.example.bottlecollector.R;
 import com.google.android.gms.common.api.ApiException;
@@ -519,6 +520,7 @@ public class LocaitonUpdates extends AppCompatActivity {
         if(distance >= rollDistance){
             GegenstandSpeicher gs = GegenstandSpeicher.getInstance(main);
             gs.speicherDaten(Belohnung.belohnungeng(distance,rollDistance));
+            gs.speicherGeld(ListActivity.wert);
             distance = distance %rollDistance;
 
             StatisikSpeicher ss = StatisikSpeicher.getInstance(main);

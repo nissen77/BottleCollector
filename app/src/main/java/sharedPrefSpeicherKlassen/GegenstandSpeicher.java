@@ -59,4 +59,17 @@ public class GegenstandSpeicher {
         return erg;
     }
 
+    public void speicherGeld(int val){
+        if(sharedPref.contains(cont.getString(R.string.geldGesamt))){
+            val += ladeGeld();
+        }
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(cont.getString(R.string.geldGesamt), val);
+        editor.apply();
+    }
+
+    public int ladeGeld(){
+        return sharedPref.getInt(cont.getString(R.string.geldGesamt), 0);
+    }
+
 }

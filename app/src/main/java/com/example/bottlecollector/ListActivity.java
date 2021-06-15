@@ -31,11 +31,14 @@ public class ListActivity extends AppCompatActivity {
 
         //Liste holen und anzeigen
         speicher.speicherDaten(Belohnung.belohnungeng(600, 200));
+        // nur für testzwecke
+        speicher.speicherGeld(wert);
+        //---------
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, speicher.ladeDaten());
         ListView listView = (ListView) findViewById(R.id.ausgabe);
         listView.setAdapter(adapter);
         TextView gesamtWert = (TextView) findViewById(R.id.gesamtwert);
-        wertGerundet = wert / 100.0;
+        wertGerundet = speicher.ladeGeld() / 100.0;
         gesamtWert.setText("Gesamtwert: "+ wertGerundet +"€");
 
 

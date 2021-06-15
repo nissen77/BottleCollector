@@ -162,4 +162,12 @@
         app:layout_constraintTop_toBottomOf="@+id/aktuellerTag"
         app:layout_constraintVertical_bias="0.075" />
 
+    <TextView
+        android:id="@+id/testView"
+        android:layout_width="290dp"
+        android:layout_height="108dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="544dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
