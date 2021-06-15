@@ -13,13 +13,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import sharedPrefSpeicherKlassen.StatisikSpeicher;
 
 public class StatistikActivity extends AppCompatActivity {
-
+    public RequestQueue queue;
+    public static final String TAG = "MyTag";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +47,11 @@ public class StatistikActivity extends AppCompatActivity {
 
         // Rest aufruf
 
-        //final TextView test = findViewById(R.id.testView);
-        int id = 1;
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.0.207.13:8080/BottleCollectorREST/rest/benutzer/statistik/"+id;
+        final TextView hs_user = findViewById(R.id.hs_user);
+        final TextView hs_wert = findViewById(R.id.hs_wert);
 
+        String url = "http://10.0.207.13:8080/BottleCollectorREST/rest/benutzer/highscore/";
+        queue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -57,18 +59,31 @@ public class StatistikActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         //test.setText("Respone: " + response.toString());
                         // einen einzelnen wert holen
-                        //test.setText("Response: " + response.getString("gesamt"));
+                        try {
+                            hs_user.setText("Benutzer: "+response.getString("username"));
+                            hs_wert.setText(response.getString("highscore")+"m");
+                        } catch (JSONException e) {
+                            hs_wert.setText(e.toString());
+                        }
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //test.setText("That didn't work!\n" + error.toString());
+                        hs_user.setText("That didn't work!\n" + error.toString());
 
                     }
                 });
-
+        jsonArrayRequest.setTag(TAG);
         queue.add(jsonArrayRequest);
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (queue != null) {
+            queue.cancelAll(TAG);
+        }
     }
 }
