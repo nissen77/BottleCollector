@@ -33,6 +33,7 @@ public class ListActivity extends AppCompatActivity {
         speicher.speicherDaten(Belohnung.belohnungeng(600, 200));
         // nur für testzwecke
         speicher.speicherGeld(wert);
+        wert = 0;
         //---------
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, speicher.ladeDaten());
         ListView listView = (ListView) findViewById(R.id.ausgabe);

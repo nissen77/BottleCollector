@@ -29,10 +29,10 @@
         android:text="Gesamt gegangene Meter:"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.18"
+        app:layout_constraintHorizontal_bias="0.181"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintVertical_bias="0.082" />
 
     <TextView
         android:id="@+id/kilometerGesamt"
@@ -43,10 +43,9 @@
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintVertical_bias="0.082" />
 
     <TextView
         android:id="@+id/textView3"
@@ -62,6 +61,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintVertical_bias="0.001" />
+
+    <TextView
+        android:id="@+id/highscore"
+        android:layout_width="152dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center|left"
+        android:paddingStart="10px"
+        android:text="HIGHSCORE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.6" />
 
     <TextView
         android:id="@+id/besterTag"
@@ -149,6 +162,34 @@
         app:layout_constraintVertical_bias="0.078" />
 
     <TextView
+        android:id="@+id/hs_user"
+        android:layout_width="152dp"
+        android:layout_height="36dp"
+        android:gravity="center|left"
+        android:paddingStart="10px"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.181"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.604" />
+
+    <TextView
+        android:id="@+id/hs_wert"
+        android:layout_width="152dp"
+        android:layout_height="36dp"
+        android:gravity="center|left"
+        android:paddingStart="10px"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.604" />
+
+    <TextView
         android:id="@+id/aktuelleWoche"
         android:layout_width="152dp"
         android:layout_height="36dp"
@@ -161,13 +202,5 @@
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/aktuellerTag"
         app:layout_constraintVertical_bias="0.075" />
-
-    <TextView
-        android:id="@+id/testView"
-        android:layout_width="290dp"
-        android:layout_height="108dp"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="544dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

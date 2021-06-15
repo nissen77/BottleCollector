@@ -45,7 +45,7 @@ public class StatistikActivity extends AppCompatActivity {
 
         // Rest aufruf
 
-        final TextView test = findViewById(R.id.testView);
+        //final TextView test = findViewById(R.id.testView);
         int id = 1;
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://10.0.207.13:8080/BottleCollectorREST/rest/benutzer/statistik/"+id;
@@ -55,7 +55,7 @@ public class StatistikActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        test.setText("Respone: " + response.toString());
+                        //test.setText("Respone: " + response.toString());
                         // einen einzelnen wert holen
                         //test.setText("Response: " + response.getString("gesamt"));
                     }
@@ -63,7 +63,7 @@ public class StatistikActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        test.setText("That didn't work!\n" + error.toString());
+                        //test.setText("That didn't work!\n" + error.toString());
 
                     }
                 });
