@@ -33,21 +33,22 @@
                 android:textAlignment="center"
                 android:textSize="30dp"
                 android:layout_margin="50dp"
-                android:textColor="#ffff"/>
+                android:textColor="#ffff"
+                android:layout_marginBottom="0dp"
+                />
 
         <EditText
             android:id="@+id/userName"
             android:layout_width="319dp"
-            android:layout_height="7dp"
+            android:layout_height="4dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="30dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="Benutzername"
+            android:inputType="textPersonName"
             android:textAlignment="center"
-            android:textColor="#ffff"
-            />
+            android:textColor="#ffff" />
 
         <TextView
                 android:layout_width="match_parent"
@@ -56,18 +57,26 @@
                 android:textColor="#ffff"
                 android:textAlignment="center"
                 android:textSize="30dp"
-                android:layout_margin="50dp"/>
+                android:layout_margin="50dp"
+                android:layout_marginBottom="20dp"
+            />
 
         <EditText
             android:id="@+id/userPassword"
             android:layout_width="311dp"
-            android:layout_height="8dp"
+            android:layout_height="4dp"
             android:layout_marginLeft="50dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPassword"
             android:textAlignment="center"
-            android:textColor="#ffff"
+            android:textColor="#ffff" />
+
+        <TextView
+            android:id="@+id/login_error"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:textAlignment="center"
             />
 
         <Button
