@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -24,22 +25,61 @@
             android:textSize="40dp"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:text="Benutzername" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/username"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:hint="hint" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="49dp"
+                android:text="Benutzername"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:layout_margin="50dp"
+                android:textColor="#ffff"/>
+
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="319dp"
+            android:layout_height="7dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Benutzername"
+            android:textAlignment="center"
+            android:textColor="#ffff"
+            />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:text="Passwort"
+                android:textColor="#ffff"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:layout_margin="50dp"/>
+
+        <EditText
+            android:id="@+id/userPassword"
+            android:layout_width="311dp"
+            android:layout_height="8dp"
+            android:layout_marginLeft="50dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:textColor="#ffff"
+            />
+
+        <Button
+            android:id="@+id/login_bn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ANMELDEN"
+            android:textColor="#ffff"
+            android:background="?android:attr/selectableItemBackground"
+            android:textSize="30dp"
+            android:onClick="anmeldenButtonHandler"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
