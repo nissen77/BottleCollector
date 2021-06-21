@@ -25,20 +25,22 @@ public class LoginActivity extends AppCompatActivity {
 
     public void anmeldenButtonHandler(View view) {
         anmelden();
+
         //start next activity
         //startActivity(new Intent(this, ListActivity.class));
     }
 
-    public void anmelden(){
+    public boolean anmelden(){
 
         String name = String.valueOf(username.getText());
         String password = String.valueOf(userPassword.getText());
 
-        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, password, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, password, Toast.LENGTH_SHORT).show();
 
+        //if(password false) .... return false;
 
-
+        return true;
     }
 }
 
