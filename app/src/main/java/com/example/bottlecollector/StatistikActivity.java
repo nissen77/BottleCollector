@@ -2,11 +2,14 @@ package com.example.bottlecollector;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextClock;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -18,6 +21,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import sharedPrefSpeicherKlassen.StatisikSpeicher;
 
 public class StatistikActivity extends AppCompatActivity {
@@ -27,6 +33,9 @@ public class StatistikActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistik);
+
+        final Context cont = this;
+        final SharedPreferences shredPref =  cont.getSharedPreferences(cont.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         Intent intent = getIntent();
         StatisikSpeicher speicher = StatisikSpeicher.getInstance(this);
@@ -68,6 +77,7 @@ public class StatistikActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             hs_wert.setText("");
                             hs_user.setText("");
+                            error_msg.setText(e.toString());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -77,7 +87,16 @@ public class StatistikActivity extends AppCompatActivity {
                         error_msg.setText("503 Server nicht verfügbar");
 
                     }
-                });
+                }){
+            // header ueberschreiben um content-type und token zu setzen
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<>();
+                params.put("content-type", "application/json");
+                params.put("Authorization", shredPref.getString(cont.getString(R.string.userToken), "test"));
+                return params;
+            }
+        };
         jsonArrayRequest.setTag(TAG);
         queue.add(jsonArrayRequest);
 
