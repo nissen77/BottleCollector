@@ -47,20 +47,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void anmeldenButtonHandler(View view) {
-        if(anmelden()){
-            startActivity(new Intent(this, ListActivity.class));
-        }
+        anmelden();
     }
 
-    public boolean anmelden() {
-
+    public void anmelden() {
         final String name = String.valueOf(username.getText());
         final String password = String.valueOf(userPassword.getText());
-        if(name.length() == 0 || password.length() == 0) return false;
+        if(name.length() == 0 || password.length() == 0) return;
         final TextView errorView = findViewById(R.id.login_error);
         final String url = "http://10.0.207.13:8080/BottleCollectorREST/rest/account/login/";
-
-        JSONObject jsonO = new JSONObject();
 
         queue = Volley.newRequestQueue(this);
         StringRequest loginRequest = new StringRequest
@@ -68,9 +63,16 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putString(cont.getString(R.string.userToken), response);
-                            editor.apply();
+                            String[] test = response.split("\\.");
+                            if(test.length < 3){
+                                errorView.setText("Benutzername oder Passwort flasch!");
+                            }else {
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putString(cont.getString(R.string.userToken), response);
+                                editor.apply();
+                                // Lädt die nächste Seite nach erfolgreichem Login
+                                startActivity(new Intent(cont, ListActivity.class));
+                            }
                         } catch (Exception e) {
                             errorView.setText("Benutzername oder Passwort falsch!");
                         }
@@ -116,7 +118,6 @@ public class LoginActivity extends AppCompatActivity {
         };
         loginRequest.setTag("LoginTag");
         queue.add(loginRequest);
-        return true;
     }
 
     @Override
