@@ -98,13 +98,13 @@ public class LoginActivity extends AppCompatActivity {
 
                     body = jsonObject.toString();
                 } catch (JSONException e)
-                {}
+                { errorView.setText(e.toString()); }
 
                 try
                 {
                     return body.toString().getBytes("utf-8");
                 } catch (Exception e)
-                {}
+                { errorView.setText(e.toString()); }
                 return null;
             }
 
