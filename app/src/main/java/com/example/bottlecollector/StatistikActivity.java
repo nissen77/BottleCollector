@@ -68,8 +68,6 @@ public class StatistikActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        //test.setText("Respone: " + response.toString());
-                        // einen einzelnen wert holen
                         try {
                             error_msg.setText("");
                             hs_user.setText("Benutzer: "+response.getString("username"));
@@ -84,8 +82,12 @@ public class StatistikActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        error_msg.setText("503 Server nicht verfügbar");
-
+                        if(error instanceof  AuthFailureError){
+                            //todo: wenn der Token nicht gültig ist ,soll man wieder auf die Login in Seite kommen
+                            error_msg.setText("Token nicht gültig!");
+                        }else {
+                            error_msg.setText("503 Server nicht verfügbar");
+                        }
                     }
                 }){
             // header ueberschreiben um content-type und token zu setzen
