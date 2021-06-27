@@ -29,6 +29,8 @@ import sharedPrefSpeicherKlassen.StatisikSpeicher;
 public class StatistikActivity extends AppCompatActivity {
     public RequestQueue queue;
     public static final String TAG = "MyTag";
+    final public Context cont = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +86,8 @@ public class StatistikActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         if(error instanceof  AuthFailureError){
                             //todo: wenn der Token nicht gültig ist ,soll man wieder auf die Login in Seite kommen
-                            error_msg.setText("Token nicht gültig!");
+                            // error_msg.setText("Token nicht gültig!");
+                            startActivity(new Intent(cont, LoginActivity.class));
                         }else {
                             error_msg.setText("503 Server nicht verfügbar");
                         }
@@ -111,4 +114,5 @@ public class StatistikActivity extends AppCompatActivity {
             queue.cancelAll(TAG);
         }
     }
+
 }
