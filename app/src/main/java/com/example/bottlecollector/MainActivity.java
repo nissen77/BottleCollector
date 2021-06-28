@@ -52,13 +52,7 @@ public class MainActivity extends AppCompatActivity {
         StatisikSpeicher speicher = StatisikSpeicher.getInstance(this);
         speicher.initSharedPref();
         speicher.checkDate();
-
-        //speicher.setGeganeneMeterGesamt(30000);
-        // set aktuelle woche muss vor aktueller tag aufgerufen werden
-        //speicher.setAktuelleWoche(150);
-        //speicher.setAktuellerTag(160);
-
-    }
+        }
 
     public void sendMessage(View view){
         Intent intent = new Intent(this, ListActivity.class);
@@ -68,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
     public void startUpdatesButtonHandler(View view) {
         if (!lu.mRequestingLocationUpdates) {
             lu.mRequestingLocationUpdates = true;
-            //lu.setButtonsEnabledState();
             lu.startLocationUpdates();
         }
         startActivity(new Intent(this, LoginActivity.class));

@@ -85,8 +85,6 @@ public class StatistikActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         if(error instanceof  AuthFailureError){
-                            //todo: wenn der Token nicht gültig ist ,soll man wieder auf die Login in Seite kommen
-                            // error_msg.setText("Token nicht gültig!");
                             startActivity(new Intent(cont, LoginActivity.class));
                         }else {
                             error_msg.setText("503 Server nicht verfügbar");

@@ -116,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                 return params;
             }
         };
+        //Tag muss zum abbrechen gestzt werden.
         loginRequest.setTag("LoginTag");
         queue.add(loginRequest);
     }
