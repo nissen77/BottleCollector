@@ -29,12 +29,13 @@ public class ListActivity extends AppCompatActivity {
 
         GegenstandSpeicher speicher = GegenstandSpeicher.getInstance(this);
 
-        //Liste holen und anzeigen
+        // Test Daten für demo
         speicher.speicherDaten(Belohnung.belohnungeng(600, 200));
         // nur für testzwecke
         speicher.speicherGeld(wert);
         wert = 0;
         //---------
+        //Liste holen und anzeigen
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, speicher.ladeDaten());
         ListView listView = (ListView) findViewById(R.id.ausgabe);
         listView.setAdapter(adapter);

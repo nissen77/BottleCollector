@@ -127,10 +127,13 @@ public class LocaitonUpdates extends AppCompatActivity {
 
     public Activity main;
 
+
     private int distance = 0;
     private int distance_statistics = 0;
-    private int rollDistance = 200;
-    private int shiverProtection = 30;
+
+    //Konstanten
+    private final int rollDistance = 200;
+    private final int shiverProtection = 30;
 
 
     //=======================================

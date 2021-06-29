@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             String[] test = response.split("\\.");
                             if(test.length < 3){
-                                errorView.setText("Benutzername oder Passwort flasch!");
+                                errorView.setText("Benutzername oder Passwort falsch!");
                             }else {
                                 SharedPreferences.Editor editor = sharedPref.edit();
                                 editor.putString(cont.getString(R.string.userToken), response);
